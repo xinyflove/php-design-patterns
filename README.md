@@ -1,2 +1,4 @@
-# Initial page
+# 开始页
+
+PHP设计模式学习整理
 
