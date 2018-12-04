@@ -4,14 +4,23 @@
 
 简单工厂模式\(Simple Factory Pattern\)：又称为静态工厂方法\(Static Factory Method\)模式，它属于类创建型模式。在简单工厂模式中，可以根据参数的不同返回不同类的实例。简单工厂模式专门定义一个类来负责创建其他类的实例，被创建的实例通常都具有共同的父类。
 
+## 模式结构
+
+简单工厂模式包含如下角色：
+
+* Factory：工厂角色工厂角色负责实现创建所有实例的内部逻辑
+* Product：抽象产品角色抽象产品角色是所创建的所有对象的父类，负责描述所有实例所共有的公共接口
+* ConcreteProduct：具体产品角色具体产品角色是创建目标，所有创建的对象都充当这个角色的某个具体类的实例。
+
 ## 实例
 
         创建一个计算器控制程序，可以计算给定两个数的加减乘除得到结果。每种运算方法都会有`getResult()`方法返回计算结果，不看代码先考虑一下如何通过该模式设计完成此功能。
 
 　　由题可知加减乘除都属于一种运算方法，并且都具有`getResult`方法，所以首先可以定义一个接口或者抽象类，作为这四个运算方法的公共父类，并在其中声明一个公共的draw方法。
 
+运算接口（抽象产品角色）
+
 ```php
-// 运算接口
 interface Operation {
 	public function getResult($arg1,$arg2);
 }
@@ -23,10 +32,9 @@ interface Operation {
 
  下面就是编写具体的运算方法，每种运算方法都实现`Operation` 接口
 
-加法
+加法类 实现运算接口（具体产品角色）
 
 ```php
-// 加法类 实现运算接口
 class OperstionAdd implements Operation {
 
     public function __construct()
@@ -43,10 +51,9 @@ class OperstionAdd implements Operation {
 }
 ```
 
-减法
+减法类 实现运算接口（具体产品角色）
 
 ```php
-// 减法类 实现运算接口
 class OperstionSub implements Operation {
 
     public function __construct()
@@ -63,10 +70,9 @@ class OperstionSub implements Operation {
 }
 ```
 
-乘法
+乘法类 实现运算接口（具体产品角色）
 
 ```php
-// 乘法类 实现运算接口
 class OperstionMul implements Operation {
 
     public function __construct()
@@ -83,10 +89,9 @@ class OperstionMul implements Operation {
 }
 ```
 
-除法
+除法类 实现运算接口（具体产品角色）
 
 ```php
-// 除法类 实现运算接口
 class OperstionDiv implements Operation {
 
     public function __construct()
@@ -105,8 +110,9 @@ class OperstionDiv implements Operation {
 
  下面是工厂类的具体实现
 
+运算工厂类（工厂角色）
+
 ```php
-// 运算工厂类
 class OperationFactory {
 
     public static function createOperation($operate)
