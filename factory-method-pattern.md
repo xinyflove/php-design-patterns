@@ -6,14 +6,24 @@
 
 工厂方法模式\(Factory Method Pattern\)又称为工厂模式，也叫虚拟构造器\(Virtual Constructor\)模式或者多态工厂\(Polymorphic Factory\)模式，它属于类创建型模式。在工厂方法模式中，工厂父类负责定义创建产品对象的公共接口，而工厂子类则负责生成具体的产品对象，这样做的目的是将产品类的实例化操作延迟到工厂子类中完成，即通过工厂子类来确定究竟应该实例化哪一个具体产品类。
 
+## 模式结构
+
+工厂方法模式包含如下角色：
+
+* Product：抽象产品
+* ConcreteProduct：具体产品
+* Factory：抽象工厂
+* ConcreteFactory：具体工厂
+
 ## 实例
 
 我们还是以计算器控制程序为例。 现在需要设计一个这样的运算类，它具有多种运算方法（运算器），用来计算加减乘除。每种运算方法都会有`getResult()`方法返回运算结果， 下面我们完成这个运算类。
 
 首先完成运算方法（运算器）的设计，编写一个运算方法的公共接口
 
+运算方法公共接口（抽象产品）
+
 ```php
-// 运算方法公共接口
 interface Operation {
 	public function getResult($arg1,$arg2);
 }
@@ -21,7 +31,7 @@ interface Operation {
 
 下面就是编写具体的运算方法，每种运算方法都实现`Operation` 接口
 
-加法运算方法
+加法运算方法（具体产品）
 
 ```php
 class OperstionAdd implements Operation {
@@ -40,7 +50,7 @@ class OperstionAdd implements Operation {
 }
 ```
 
-减法运算方法
+减法运算方法（具体产品）
 
 ```php
 class OperstionSub implements Operation {
@@ -59,7 +69,7 @@ class OperstionSub implements Operation {
 }
 ```
 
-乘法运算方法
+乘法运算方法（具体产品）
 
 ```php
 class OperstionMul implements Operation {
@@ -78,7 +88,7 @@ class OperstionMul implements Operation {
 }
 ```
 
-除法运算方法
+除法运算方法（具体产品）
 
 ```php
 class OperstionDiv implements Operation {
@@ -99,8 +109,9 @@ class OperstionDiv implements Operation {
 
 下面就跟是跟简单工厂模式不一样了， 现在我们按照定义所说定义一个抽象的工厂接口`OperationFactory`。
 
+运算工厂接口（抽象工厂）
+
 ```php
-// 运算工厂接口
 interface OperationFactory {
   public function getOperation();
 }
@@ -108,7 +119,7 @@ interface OperationFactory {
 
 里面有一个`getOperation()`方法返回我们的Operation 类，接下来我们把上面定义好的每个运算方法都提供一个工厂类，这些工厂类实现了OperationFactory 。
 
-加法运算工厂
+加法运算工厂（具体工厂）
 
 ```php
 class OperstionAddFactory implements OperationFactory {
@@ -121,7 +132,7 @@ class OperstionAddFactory implements OperationFactory {
 }
 ```
 
-减法运算工厂
+减法运算工厂（具体工厂）
 
 ```php
 class OperstionSubFactory implements OperationFactory {
@@ -134,7 +145,7 @@ class OperstionSubFactory implements OperationFactory {
 }
 ```
 
-乘法运算工厂
+乘法运算工厂（具体工厂）
 
 ```php
 class OperstionMulFactory implements OperationFactory {
@@ -147,7 +158,7 @@ class OperstionMulFactory implements OperationFactory {
 }
 ```
 
-除法运算工厂
+除法运算工厂（具体工厂）
 
 ```php
 class OperstionDivFactory implements OperationFactory {
