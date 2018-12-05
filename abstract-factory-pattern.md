@@ -51,6 +51,8 @@
 
 ##  应用实例
 
+我们将创建 Shape 和 Color 接口和实现这些接口的实体类。下一步是创建抽象工厂类 AbstractFactory。接着定义工厂类 ShapeFactory 和 ColorFactory，这两个工厂类都是扩展了 AbstractFactory。然后创建一个工厂创造器/生成器类 FactoryProducer。
+
 第一步， 为形状创建一个接口。
 
 ```php
